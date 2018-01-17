@@ -2,7 +2,7 @@ QOfCategoricalF=function(datasetCF){
   #codigo para hacer las pruebas
   #datasetCF<- cbind.data.frame(Genero=d_preproc[,3],d_preproc[,26:30],CofS=d_preproc[,57])
   # datasetCF<-daterror
-  #veremos si esto causa un error
+  
   
   calc_mode=function(x,primsec=1){
     #temp<-table(datasetC$SH3)
@@ -20,15 +20,15 @@ QOfCategoricalF=function(datasetCF){
   
   
   Feature<-colnames(datasetCF)
-  Count<- apply(datasetCF,2,FUN = function(x) length(x))
-  Miss<- apply(datasetCF,2,FUN = function(x)  sum(is.na(x)))
-  Card<- apply(datasetCF,2,FUN = function(x) length(levels(factor(x))))
-  Mode<- apply(datasetCF,2, FUN=calc_mode,primsec=1)
-  ModeFrec<- apply(datasetCF,2, FUN=calc_frecmode,primsec=1)
-  ModePerc<-paste(round(ModeFrec/Count*100,digits = 2),"%",sep = "")
-  Mode2<-apply(datasetCF,2, FUN=calc_mode,primsec=2)
-  Mode2Frec<-apply(datasetCF,2, FUN=calc_frecmode,primsec=2)
-  Mode2Perc<-paste(round(Mode2Frec/Count*100,digits = 2),"%",sep = "")
+  Count<- as.vector(apply(datasetCF,2,FUN = function(x) length(x)))
+  Miss<- as.vector(apply(datasetCF,2,FUN = function(x)  sum(is.na(x))))
+  Card<- as.vector(apply(datasetCF,2,FUN = function(x) length(levels(factor(x)))))
+  Mode<- as.vector(apply(datasetCF,2, FUN=calc_mode,primsec=1))
+  ModeFrec<- as.vector(apply(datasetCF,2, FUN=calc_frecmode,primsec=1))
+  ModePerc<-as.vector(paste(round(ModeFrec/Count*100,digits = 2),"%",sep = ""))
+  Mode2<-as.vector(apply(datasetCF,2, FUN=calc_mode,primsec=2))
+  Mode2Frec<-as.vector(apply(datasetCF,2, FUN=calc_frecmode,primsec=2))
+  Mode2Perc<-as.vector(paste(round(Mode2Frec/Count*100,digits = 2),"%",sep = ""))
   
   
   
@@ -40,9 +40,7 @@ QOfCategoricalF=function(datasetCF){
   # }
   
   
-  TQCategoricalFeatures<-data.frame(Count=as.character(Count),Miss=as.character(Miss),Card=as.character(Card)
-                                    ,Mode=as.character(Mode),ModeFrec=as.character(ModeFrec),ModePerc=as.character(ModePerc),
-                                    Mode2=as.character(Mode2),Mode2Frec=as.character(Mode2Frec),Mode2Perc=as.character(Mode2Perc))
+  TQCategoricalFeatures<-data.frame(Count,Miss,Card,Mode,ModeFrec,ModePerc,Mode2,Mode2Frec,Mode2Perc)
   
   
 }
