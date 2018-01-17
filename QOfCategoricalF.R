@@ -2,6 +2,7 @@ QOfCategoricalF=function(datasetCF){
   #codigo para hacer las pruebas
   #datasetCF<- cbind.data.frame(Genero=d_preproc[,3],d_preproc[,26:30],CofS=d_preproc[,57])
   # datasetCF<-daterror
+  #veremos si esto causa un error
   
   calc_mode=function(x,primsec=1){
     #temp<-table(datasetC$SH3)
